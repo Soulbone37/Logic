@@ -1,0 +1,67 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+package com.mycompany.actividad_1;
+//importamos java.until.*/; para usar el scanner
+import java.util.*;
+
+/**
+ *
+ * @author Saith Perez, Juan Aguilera, Camila Manzano
+ */
+public class Actividad_1 {
+//Activamos el scanner
+    private static Scanner input = new Scanner(System.in);
+
+    public static void main(String[] args) {
+//definimos los 2 cortes como 0.0 como inicial
+        double primerCorte = 0.0;
+        double segundoCorte = 0.0;
+//hacemos un ciclo while que cuando se ejecute la primera vez sea verdadero
+        while (true) {
+            System.out.println("Ingrese la nota del primer corte: ");
+//cambiamos la variable de primerCorte al número que el usuario digite
+            primerCorte = input.nextFloat();
+//hacemos un ciclo if que verifique si la nota del primer corte esta dentro de los números validos y si es haci rompemos el while
+            if (primerCorte <= 5.0 && primerCorte >= 0.0) {
+                break;
+//hacemos un else al if anterior por si el ususario digita números incorrectos escribir un mensaje de error y volverlo a intentar
+            } else {
+                System.out.println("La nota debe estar entre 0.0 y 5.0, intente de nuevo");
+            }
+        }
+//hacemos otro ciclo while igual al anterior pero esta vez para verificar las notas del segundo corte
+        while (true) {
+            System.out.println("Ingrese la nota del segundo corte");
+            segundoCorte = input.nextFloat();
+            if (segundoCorte <= 5.0 && segundoCorte >= 0.0) {
+                break;
+            } else {
+                System.out.println("La nota debe estar entre 0.0 y 5.0, intente de nuevo");
+            }
+        }
+//declaramos una variable tipo double que nos de la nota que tenemos en los dos primeros cortes
+        double notaActual = primerCorte * 0.35 + segundoCorte * 0.35;
+//hacemos un ciclo if que compruebe si nuestra nota en los 2 primeros cortes es suficiente para pasar, si es haci imprimimos un mensaje
+        if (notaActual >= 3.0) {
+            System.out.println("Felicitaciones! Aprobaste el curso con los dos primeros cortes");
+//hacemos un else al if anterior por si no se cumple
+        } else {
+//hacemos un if para comprobar si ya no hay posibilidades de pasar con la nota máxima del tercer corte
+            if ((primerCorte * 0.35) + (segundoCorte * 0.35) + (5.0 * 0.30) < 3.0) {
+                System.out.println("Ya no hay posibilidad que apruebes el curso.  Debes estudiar mejor para el próximo semestre");
+//hacemos un else if en caso de que con los 2 primeros cortes no pasemos pero aún así tenemos posibilidades en el tercer corte
+            } else if ((primerCorte * 0.35) + (segundoCorte * 0.35) < 3.0) {
+//declaramos 2 variables, porcentajeRequerido que nos diga cual porcentaje debemos sacar en el tercer corte, y notaPasar 
+//que divida ese porcentaje en 0.30 para que nos de la nota requerida en el tercer recorte
+                double porcentajeRequerido = (3.0 - notaActual);
+                double notaPasar = porcentajeRequerido / 0.30;
+//ahora convertimos a string la nota requerida para con el String.format límitar el número a 2 decimales para que sea más legible
+                String notaRequerida = String.format("%.2f", notaPasar);
+//por último imprimimos la nota mínima que el estudiante necesita en el tercer recorte para pasar el curso.
+                System.out.println("La nota que usted requiere en el tercer corte para pasar es: " + notaRequerida);
+            }
+        }
+
+    }
+}
